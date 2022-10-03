@@ -7,13 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
 import 'package:flutterfire_ui/auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tickettouch/screen/account/login_screen.dart';
-import 'package:tickettouch/screen/home/hidden_drawer.dart';
+import 'package:tickettouch/screen/auth/auth.dart';
+import 'package:tickettouch/screen/home/menu.dart';
 import 'package:tickettouch/screen/onboarding/onboarding_screen.dart';
+import 'package:tickettouch/theme/theme_constants.dart';
 
 import 'firebase_options.dart';
+
+bool _showOnBoarding = true;
 
 void main() async {
   // flutter init
@@ -24,7 +26,7 @@ void main() async {
 
   // shared preferences init
   final prefs = await SharedPreferences.getInstance();
-  final showOnBoarding = prefs.getBool('showOnBoarding') ?? true;
+  _showOnBoarding = prefs.getBool('showOnBoarding') ?? true;
 
   // firebase auth
   FlutterFireUIAuth.configureProviders([
@@ -51,56 +53,47 @@ void main() async {
   });
   await remoteConfig.fetchAndActivate();
 
+
   // run the app and send data with
-  runApp(TicketTouchApp(showOnBoarding: showOnBoarding));
+  runApp(const TicketTouchApp());
+  //runApp(Auth());
 }
 
 class TicketTouchApp extends StatelessWidget {
-  final bool showOnBoarding;
-
-  // get auth and showOnBoarding from main()
-  const TicketTouchApp({Key? key, required this.showOnBoarding})
-      : super(key: key);
+  const TicketTouchApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final auth = FirebaseAuth.instance;
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          systemStatusBarContrastEnforced: false,
-          systemNavigationBarContrastEnforced: false,
-          systemNavigationBarColor: Colors.transparent,
-          systemNavigationBarDividerColor: Colors.transparent,
-          systemNavigationBarIconBrightness: Brightness.light,
-          statusBarIconBrightness: Brightness.light,
+      value: const SystemUiOverlayStyle(
+        systemStatusBarContrastEnforced: false,
+        systemNavigationBarContrastEnforced: false,
+        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.light,
+      ),
+      child: MaterialApp(
+        title: 'TicketTouch',
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        // first app start = OnBoardingScreen
+        // signed out = LoginInScreen
+        // signed in = HiddenDrawer (HomeScreen)
+        home: SplashScreen.navigate(
+          backgroundColor: const Color(0xFF00a9ce),
+          endAnimation: 'splash',
+          name: 'assets/animations/splash_animation.riv',
+          next: (context) => auth.currentUser == null
+              ? (_showOnBoarding
+                  ? const OnBoardingScreen()
+                  : const AuthScreen())
+              : const Menu(),
+          until: () => Future.delayed(const Duration(milliseconds: 0)),
         ),
-        child: MaterialApp(
-          title: 'TicketTouch',
-          theme: _buildTheme(Brightness.light),
-          darkTheme: _buildTheme(Brightness.dark),
-          // first app start = OnBoardingScreen
-          // signed out = LoginInScreen
-          // signed in = HiddenDrawer (HomeScreen)
-          home: SplashScreen.navigate(
-            backgroundColor: const Color(0xFF00a9ce),
-            endAnimation: 'splash',
-            name: 'assets/animations/splash_animation.riv',
-            next: (context) => auth.currentUser == null
-                ? (showOnBoarding
-                    ? const OnBoardingScreen()
-                    : const LogInScreen())
-                : const HiddenDrawer(),
-            until: () => Future.delayed(const Duration(seconds: 6)),
-          ),
-        ));
-  }
-
-  // app theme
-  ThemeData _buildTheme(brightness) {
-    var baseTheme = ThemeData(brightness: brightness);
-
-    return baseTheme.copyWith(
-      textTheme: GoogleFonts.latoTextTheme(baseTheme.textTheme),
+      ),
     );
   }
 }

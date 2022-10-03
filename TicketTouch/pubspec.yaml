@@ -38,6 +38,8 @@ dependencies:
   rive: ^0.9.1
   hidden_drawer_menu: ^3.0.1
   smooth_page_indicator: ^1.0.0
+  settings_ui: ^2.0.0
+  theme_mode_handler: ^3.0.0
   # firebase
   flutterfire: ^0.0.1
   flutterfire_cli: ^0.2.6
@@ -79,23 +81,16 @@ flutter:
     - assets/images/
     - assets/logos/
 
+    # animations
     - assets/animations/splash_animation.riv
 
+    # images
     - assets/images/
 
+    # logos
     - assets/logos/1024.png
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
   # fonts:
   #   - family: Schyler
   #     fonts:
@@ -107,6 +102,4 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+

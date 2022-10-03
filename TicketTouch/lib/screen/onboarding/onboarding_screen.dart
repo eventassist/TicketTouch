@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tickettouch/screen/account/login_screen.dart';
+import 'package:tickettouch/screen/auth/auth.dart';
 
 import 'onbaording_page_3.dart';
 import 'onboarding_page_1.dart';
@@ -30,7 +30,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final double additionalBottomPadding = MediaQuery.of(context).padding.bottom;
+    final double systemNavBarPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -85,9 +85,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               isLastPage == false
                   ? Padding(
                       padding: EdgeInsets.only(
-                          left: 45, right: 45, bottom: 45 + additionalBottomPadding, top: 15),
+                          left: 45, right: 45, bottom: 45 + systemNavBarPadding, top: 15),
                       child: SizedBox(
-                        width: 700,
+                        width: 400,
                         height: 48,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,9 +130,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       ))
                   : Padding(
                       padding: EdgeInsets.only(
-                          left: 45, right: 45, bottom: 45 + additionalBottomPadding, top: 15),
+                          left: 45, right: 45, bottom: 45 + systemNavBarPadding, top: 15),
                       child: SizedBox(
-                        width: 700,
+                        width: 400,
                         height: 48,
                         child: ElevatedButton(
                           style: ButtonStyle(
@@ -156,7 +156,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 (value) => Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const LogInScreen())));
+                                            const AuthScreen())));
                           },
                         ),
                       ),
