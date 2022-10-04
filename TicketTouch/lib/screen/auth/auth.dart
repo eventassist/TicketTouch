@@ -14,7 +14,7 @@ class _AuthScreenState extends State<AuthScreen> {
   // init, show the login page
   bool showLoginScreen = true;
 
-  void _toggleScreens() {
+  void toggleScreens() {
     setState(() {
       showLoginScreen = !showLoginScreen;
     });
@@ -23,9 +23,9 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     if (showLoginScreen) {
-      return LoginScreen(showRegisterScreen: _toggleScreens);
+      return LoginScreen(showRegisterScreen: toggleScreens);
     } else {
-      return RegisterScreen(showLoginScreen: _toggleScreens);
+      return RegisterScreen(showLoginScreen: toggleScreens);
     }
   }
 }

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:tickettouch/screen/home/menu.dart';
 import 'package:tickettouch/screen/auth/forgot_password_screen.dart';
+import 'package:tickettouch/utils/helper_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback showRegisterScreen;
@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenSate extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
@@ -31,19 +32,27 @@ class _LoginScreenSate extends State<LoginScreen> {
         _isLoading = true;
       });
       try {
-        await FirebaseAuth.instance
+        await _auth
             .signInWithEmailAndPassword(
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
-            .whenComplete(() => FirebaseAuth.instance.currentUser != null
-                ? Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const Menu()))
-                : null);
+            .then((value) {
+          // if user is verified and exist login else not verified or not exist
+          if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const Menu()));
+          } else if (!_auth.currentUser!.emailVerified) {
+            _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
+                context,
+                'Your email is not verified! Please check your spam folder if you can\'t find the verify mail.'));
+          }
+          setState(() => _isLoading = false);
+        });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
-          _error = 'No user found for that email.';
+          _error = 'Incorrect password or Account doesn\'t exist.';
         } else if (e.code == 'wrong-password') {
-          _error = 'Wrong password provided for that user.';
+          _error = 'Incorrect password or Account doesn\'t exist.';
         } else {
           _error = e.message!;
         }
@@ -136,8 +145,11 @@ class _LoginScreenSate extends State<LoginScreen> {
                         // error msg
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Text(_error,
-                              style: const TextStyle(color: Color(0xFFB00000))),
+                          child: Text(
+                            _error,
+                            style: const TextStyle(color: Color(0xFFB00000)),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
 
                         const SizedBox(height: 5),
@@ -281,9 +293,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: GestureDetector(
-                            onTap: FirebaseAuth.instance.currentUser == null
-                                ? signIn
-                                : null,
+                            onTap: () => signIn(),
                             child: Container(
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
@@ -371,7 +381,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 10),
+                        distanceHeight(10),
                         // social login
                         Padding(
                           padding: EdgeInsets.only(
@@ -382,7 +392,6 @@ class _LoginScreenSate extends State<LoginScreen> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               // TODO Social Icons
-
                               GestureDetector(
                                 onTap: () {
                                   showDialog(
@@ -401,13 +410,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                               ),
                               const SizedBox(width: 30),
                               GestureDetector(
-                                onTap: () {
-
-
-
-
-                                                                                                                                                                                   
-                                },
+                                onTap: () {},
                                 child: const Icon(
                                   Icons.g_mobiledata,
                                   color: Color(0xFF00a9ce),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tickettouch/screen/home/menu.dart';
+import 'package:tickettouch/utils/helper_widgets.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback showLoginScreen;
@@ -14,6 +14,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenSate extends State<RegisterScreen> {
+  final _auth = FirebaseAuth.instance;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _passwordAgainController = TextEditingController();
@@ -30,26 +31,27 @@ class _RegisterScreenSate extends State<RegisterScreen> {
         _isLoading = true;
       });
       try {
-        await FirebaseAuth.instance
+        await _auth
             .createUserWithEmailAndPassword(
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
-            .whenComplete(() => FirebaseAuth.instance.currentUser != null
-                ? Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Menu()))
-                : null);
+            .whenComplete(() {
+          if (_auth.currentUser != null && !_auth.currentUser!.emailVerified) {
+            _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
+                context,
+                'Your account ist registered! Please verify your email.'));
+          }
+          setState(() => _isLoading = false);
+        });
       } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          _error = 'The password provided is too weak.';
-        } else if (e.code == 'email-already-in-use') {
-          _error = 'The account already exists for that email.';
+        if (e.code == 'email-already-in-use') {
+          _error = 'The account already exists.';
         } else {
-          _error = e.message!;
+          print(e.message!);
         }
-      } catch (e) {
-        _error = e.toString();
+        setState(() {
+          _isLoading = false;
+        });
       }
     }
   }
@@ -138,8 +140,11 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                         // error msg
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
-                          child: Text(_error,
-                              style: const TextStyle(color: Color(0xFFB00000))),
+                          child: Text(
+                            _error,
+                            style: const TextStyle(color: Color(0xFFB00000)),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
 
                         const SizedBox(height: 5),
@@ -162,7 +167,8 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                                   controller: _emailController,
                                   validator: _emailValidator,
                                   decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.email_outlined),
+                                    prefixIcon:
+                                        const Icon(Icons.email_outlined),
                                     focusColor: const Color(0xFF00a9ce),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
@@ -245,7 +251,8 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                                   controller: _passwordAgainController,
                                   validator: _passwordAgainValidator,
                                   decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.lock_reset_outlined),
+                                    prefixIcon:
+                                        const Icon(Icons.lock_reset_outlined),
                                     focusColor: const Color(0xFF00a9ce),
                                     enabledBorder: OutlineInputBorder(
                                       borderSide:
@@ -291,9 +298,7 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: GestureDetector(
-                            onTap: FirebaseAuth.instance.currentUser == null
-                                ? signUp
-                                : null,
+                            onTap: () => signUp(),
                             child: Container(
                               padding: const EdgeInsets.all(20),
                               decoration: BoxDecoration(
@@ -403,16 +408,6 @@ class _RegisterScreenSate extends State<RegisterScreen> {
   String? _passwordAgainValidator(String? formPassword) {
     if (formPassword == null || formPassword.isEmpty) {
       return 'Password repetition is required.';
-    }
-
-    // security
-    String pattern = r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(formPassword)) {
-      return '''Password does not meet security requirements.
-      - at least 8 characters
-      - an uppercase letter
-      - a number''';
     }
 
     // same passwords

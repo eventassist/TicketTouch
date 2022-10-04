@@ -53,7 +53,6 @@ void main() async {
   });
   await remoteConfig.fetchAndActivate();
 
-
   // run the app and send data with
   runApp(const TicketTouchApp());
   //runApp(Auth());
@@ -86,11 +85,19 @@ class TicketTouchApp extends StatelessWidget {
           backgroundColor: const Color(0xFF00a9ce),
           endAnimation: 'splash',
           name: 'assets/animations/splash_animation.riv',
-          next: (context) => auth.currentUser == null
-              ? (_showOnBoarding
-                  ? const OnBoardingScreen()
-                  : const AuthScreen())
-              : const Menu(),
+          next: (context) {
+            if (auth.currentUser == null && _showOnBoarding) {
+              return const OnBoardingScreen();
+            } else if (auth.currentUser == null && !_showOnBoarding) {
+              return const AuthScreen();
+            } else if (!auth.currentUser!.emailVerified) {
+              return const AuthScreen();
+            } else if (auth.currentUser != null && auth.currentUser!.emailVerified) {
+              return const Menu();
+            } else {
+              return const AuthScreen();
+            }
+          },
           until: () => Future.delayed(const Duration(milliseconds: 0)),
         ),
       ),
