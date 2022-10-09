@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // facebook
+    <string name="app_name">TicketTouch</string>
+    <string name="facebook_app_id">1140027476920190</string>
+    <string name="fb_login_protocol_scheme">fb1140027476920190</string>
+    <string name="facebook_client_token">883626d2cead6c05e146632c5c68a04b</string>
+
+
+</resources>

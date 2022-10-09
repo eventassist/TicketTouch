@@ -15,8 +15,8 @@ ThemeData lightTheme = ThemeData(
     background: Color(0xff323232),
     onBackground: Colors.white,
   ),
-  snackBarTheme: SnackBarThemeData(
-    backgroundColor: Color(0xff323232),
+  snackBarTheme: const SnackBarThemeData(
+    backgroundColor: Colors.grey,
     contentTextStyle: TextStyle(color: Colors.white),
   ),
 );
@@ -36,8 +36,9 @@ ThemeData darkTheme = ThemeData(
     background: Color(0xff323232),
     onBackground: Colors.white,
   ),
-  snackBarTheme: SnackBarThemeData(
+  snackBarTheme: const SnackBarThemeData(
     backgroundColor: Colors.black,
     contentTextStyle: TextStyle(color: Colors.white),
   ),
+
 );

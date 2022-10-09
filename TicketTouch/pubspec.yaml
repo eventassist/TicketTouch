@@ -27,11 +27,11 @@ dependencies:
   # flutter
   flutter:
     sdk: flutter
-  # icons
+  # icons & fonts
   flutter_launcher_icons: ^0.10.0 #flutter pub run flutter_launcher_icons:main
   cupertino_icons: ^1.0.2
-  # fonts
   google_fonts: ^3.0.1
+  font_awesome_flutter: ^10.2.1
   # utils
   shared_preferences: ^2.0.15
   rive_splash_screen: ^0.1.1
@@ -45,11 +45,19 @@ dependencies:
   flutterfire_cli: ^0.2.6
   flutterfire_ui: ^0.4.3+9
   firebase_core: ^1.22.0
-  firebase_auth: ^3.9.0
   firebase_remote_config: ^2.0.17
   cloud_firestore: ^3.4.8
   # google
   google_ml_kit: ^0.12.0
+  # auth
+  firebase_auth: ^3.9.0
+  google_sign_in: ^5.4.2
+  flutter_facebook_auth: ^4.4.1+1
+  sign_in_with_apple: ^3.0.0
+  crypto: ^3.0.1
+  twitter_login: ^4.0.1
+  # state management
+  provider: ^6.0.3
 
 # dev
 dev_dependencies:
@@ -89,6 +97,7 @@ flutter:
 
     # logos
     - assets/logos/1024.png
+    - assets/logos/google_logo.png
 
 
   # fonts:

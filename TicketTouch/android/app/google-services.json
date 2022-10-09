@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "222241256146",
+    "project_id": "eventassist-tickettouch",
+    "storage_bucket": "eventassist-tickettouch.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222241256146:android:f0899da62266c83402730b",
+        "android_client_info": {
+          "package_name": "eu.eventassist.tickettouch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222241256146-95oe45s8q9pvbfsn6hhgbfakkkrnhtl7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.eventassist.tickettouch",
+            "certificate_hash": "488e57233d1e39b952c7d3ac0531603d39b78a64"
+          }
+        },
+        {
+          "client_id": "222241256146-d7ss000e73c3g7o1254fljv3bir2tebt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.eventassist.tickettouch",
+            "certificate_hash": "b0cdea8f9a2a986bbcd71828c855b2d4eb0fdb80"
+          }
+        },
+        {
+          "client_id": "222241256146-9kcssllbm2tf1sb0nsq2lotmcvujdi5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLM7T2QP_4U9-xFqsL61GVT9aurLQvRko"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222241256146-9kcssllbm2tf1sb0nsq2lotmcvujdi5g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "222241256146-r4a0tss1ng681eadnt8n0ukghe77iei8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "eu.eventassist.tickettouch"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

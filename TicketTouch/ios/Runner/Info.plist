@@ -2,6 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <!-- Google Sign-in Section -->
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.222241256146-r4a0tss1ng681eadnt8n0ukghe77iei8</string>
+                <string>fb1140027476920190</string>
+            </array>
+        </dict>
+    </array>
+    <!-- End of the Google Sign-in Section -->
+    <!-- Facebook Sign-in Section -->
+    <key>FacebookAppID</key>
+    <string>1140027476920190</string>
+    <key>FacebookClientToken</key>
+    <string>883626d2cead6c05e146632c5c68a04b</string>
+    <key>FacebookDisplayName</key>
+    <string>TicketTouch</string>
+    <!-- End of the Facebook Sign-in Section -->
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

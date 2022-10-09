@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:tickettouch/screen/auth/auth.dart';
 import 'package:tickettouch/screen/home/home_screen.dart';
 import 'package:tickettouch/screen/home/settings_screen.dart';
+import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class Menu extends StatefulWidget {
   const Menu({super.key});
@@ -16,6 +16,8 @@ class Menu extends StatefulWidget {
 class _MenuState extends State<Menu> {
   List<ScreenHiddenDrawer> _pages = [];
 
+  final _auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     super.initState();
@@ -23,7 +25,7 @@ class _MenuState extends State<Menu> {
     _pages = [
       ScreenHiddenDrawer(
         ItemHiddenMenu(
-          name: 'Home',
+          name: 'TicketTouch',
           colorLineSelected: Colors.white,
           baseStyle: const TextStyle(color: Colors.white),
           selectedStyle:
@@ -59,12 +61,7 @@ class _MenuState extends State<Menu> {
           selectedStyle:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           onTap: () async {
-            await FirebaseAuth.instance.signOut();
-            await Future.delayed(const Duration(milliseconds: 1500)).then((value) =>
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AuthScreen())));
+            FirebaseAuthMethods(_auth).signOut(context);
           },
         ),
         Scaffold(
@@ -95,6 +92,7 @@ class _MenuState extends State<Menu> {
     return HiddenDrawerMenu(
       backgroundColorMenu: const Color(0xFF00a9ce),
       screens: _pages,
+      disableAppBarDefault: true, //TODO
       initPositionSelected: 0,
     );
   }

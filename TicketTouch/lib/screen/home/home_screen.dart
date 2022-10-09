@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tickettouch/screen/auth/auth.dart';
+import 'package:provider/provider.dart';
+import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,20 +16,17 @@ class _HomeScreenSate extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
 
-    final user = FirebaseAuth.instance.currentUser!;
+    final user = context.read<FirebaseAuthMethods>().user;
 
     return Scaffold(
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You\'re logged in as ${user.email!}'),
+            Text('You\'re logged in as ${user.displayName}'),
             TextButton(
                 onPressed: () async {
-                  await auth.signOut().then((value) => Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const AuthScreen();
-                      })));
+                  context.read<FirebaseAuthMethods>().signOut(context);
                 },
                 child: const Text('Sign out')),
           ],

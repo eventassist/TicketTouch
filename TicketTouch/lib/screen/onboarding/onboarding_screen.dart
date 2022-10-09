@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:tickettouch/screen/auth/auth.dart';
+import 'package:tickettouch/screen/auth/auth_screen.dart';
 
 import 'onbaording_page_3.dart';
 import 'onboarding_page_1.dart';

@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tickettouch/screen/home/menu.dart';
 import 'package:tickettouch/screen/auth/forgot_password_screen.dart';
+import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/utils/helper_widgets.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -44,7 +49,7 @@ class _LoginScreenSate extends State<LoginScreen> {
           } else if (!_auth.currentUser!.emailVerified) {
             _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
                 context,
-                'Your email is not verified! Please check your spam folder if you can\'t find the verify mail.'));
+                'Your email is not verified! Please check your spam folder if you can\'t find the verify mail.', false));
           }
           setState(() => _isLoading = false);
         });
@@ -392,47 +397,65 @@ class _LoginScreenSate extends State<LoginScreen> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               // TODO Social Icons
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return const AlertDialog(
-                                          title: Text('Facebook sign in'));
-                                    },
-                                  );
+
+                              // GOOGLE SIGN IN BUTTON
+                              IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<FirebaseAuthMethods>()
+                                      .signInWithGoogle(context);
                                 },
-                                child: const Icon(
-                                  Icons.facebook,
-                                  color: Color(0xFF00a9ce),
-                                  size: 30,
-                                ),
+                                icon:
+                                    Image.asset('assets/logos/google_logo.png'),
+                                iconSize: 35,
                               ),
-                              const SizedBox(width: 30),
-                              GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.g_mobiledata,
-                                  color: Color(0xFF00a9ce),
-                                  size: 50,
+
+                              distanceWidth(30),
+
+                              // APPLE SIGN IN BUTTON
+                              if (Platform.isIOS)
+                                IconButton(
+                                  onPressed: () {
+                                    context
+                                        .read<FirebaseAuthMethods>()
+                                        .signInWithApple(context);
+                                  },
+                                  icon: const Icon(
+                                    FontAwesomeIcons.apple,
+                                    color: Colors.black,
+                                  ),
+                                  iconSize: 35,
                                 ),
-                              ),
-                              const SizedBox(width: 30),
-                              GestureDetector(
-                                onTap: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return const AlertDialog(
-                                          title: Text('Phone sign in'));
-                                    },
-                                  );
+                              if (Platform.isIOS) distanceWidth(30),
+
+                              // FACEBOOK SIGN IN BUTTON
+                              IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<FirebaseAuthMethods>()
+                                      .signInWithFacebook(context);
                                 },
-                                child: const Icon(
-                                  Icons.call,
-                                  color: Color(0xFF00a9ce),
-                                  size: 30,
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.facebook,
+                                  color: Color(0xFF1778F2),
                                 ),
+                                iconSize: 35,
+                              ),
+
+                              distanceWidth(30),
+
+                              // TWITTER SIGN IN BUTTON
+                              IconButton(
+                                onPressed: () {
+                                  context
+                                      .read<FirebaseAuthMethods>()
+                                      .signInWithTwitter(context);
+                                },
+                                icon: const Icon(
+                                  FontAwesomeIcons.twitter,
+                                  color: Color(0xFF1DA1F2),
+                                ),
+                                iconSize: 35,
                               ),
                             ],
                           ),

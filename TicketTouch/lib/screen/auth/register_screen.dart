@@ -36,18 +36,18 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
             .whenComplete(() {
-          if (_auth.currentUser != null && !_auth.currentUser!.emailVerified) {
-            _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
-                context,
-                'Your account ist registered! Please verify your email.'));
-          }
-          setState(() => _isLoading = false);
+          setState(
+            () {
+              _isLoading = false;
+              _emailController.text = '';
+              _passwordController.text = '';
+              _passwordAgainController.text = '';
+            },
+          );
         });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {
           _error = 'The account already exists.';
-        } else {
-          print(e.message!);
         }
         setState(() {
           _isLoading = false;
