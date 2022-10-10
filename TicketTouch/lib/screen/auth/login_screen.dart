@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -413,7 +414,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                               distanceWidth(30),
 
                               // APPLE SIGN IN BUTTON
-                              if (Platform.isIOS)
+                              if (Platform.isIOS || kIsWeb)
                                 IconButton(
                                   onPressed: () {
                                     context
@@ -426,7 +427,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                                   ),
                                   iconSize: 35,
                                 ),
-                              if (Platform.isIOS) distanceWidth(30),
+                              if (Platform.isIOS || kIsWeb) distanceWidth(30),
 
                               // FACEBOOK SIGN IN BUTTON
                               IconButton(
