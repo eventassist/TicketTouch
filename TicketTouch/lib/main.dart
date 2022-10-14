@@ -6,7 +6,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:rive_splash_screen/rive_splash_screen.dart';
@@ -82,14 +81,9 @@ class TicketTouchApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = FirebaseAuth.instance;
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        systemStatusBarContrastEnforced: false,
-        systemNavigationBarContrastEnforced: false,
-        systemNavigationBarIconBrightness: Brightness.light,
-        statusBarIconBrightness: Brightness.light,
-      ),
-      child: MultiProvider(
+    setSystemUiOverlayStyle();
+
+    return MultiProvider(
         providers: [
           Provider<FirebaseAuthMethods>(
             create: (_) => FirebaseAuthMethods(auth),
@@ -125,7 +119,6 @@ class TicketTouchApp extends StatelessWidget {
             until: () => Future.delayed(const Duration(milliseconds: 0)),
           ),
         ),
-      ),
-    );
+      );
   }
 }

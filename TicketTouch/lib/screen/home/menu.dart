@@ -35,6 +35,16 @@ class _MenuState extends State<Menu> {
       ),
       ScreenHiddenDrawer(
         ItemHiddenMenu(
+          name: 'Ticket Validator',
+          colorLineSelected: Colors.white,
+          baseStyle: const TextStyle(color: Colors.white),
+          selectedStyle:
+          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        Container(),
+      ),
+      ScreenHiddenDrawer(
+        ItemHiddenMenu(
           name: 'Account',
           colorLineSelected: Colors.white,
           baseStyle: const TextStyle(color: Colors.white),
@@ -92,7 +102,6 @@ class _MenuState extends State<Menu> {
     return HiddenDrawerMenu(
       backgroundColorMenu: const Color(0xFF00a9ce),
       screens: _pages,
-      disableAppBarDefault: true, //TODO
       initPositionSelected: 0,
     );
   }

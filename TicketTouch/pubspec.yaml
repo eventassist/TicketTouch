@@ -40,15 +40,17 @@ dependencies:
   smooth_page_indicator: ^1.0.0
   settings_ui: ^2.0.0
   theme_mode_handler: ^3.0.0
-  # firebase
+  google_nav_bar: ^5.0.6
+  # flutterfire
   flutterfire: ^0.0.1
   flutterfire_cli: ^0.2.6
   flutterfire_ui: ^0.4.3+9
+  # firebase
   firebase_core: ^1.22.0
+  firebase_analytics: ^9.3.8
   firebase_remote_config: ^2.0.17
   cloud_firestore: ^3.4.8
-  # google
-  google_ml_kit: ^0.12.0
+  firebase_storage: ^10.3.11
   # auth
   firebase_auth: ^3.9.0
   google_sign_in: ^5.4.2
