@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tickettouch/screen/home/menu.dart';
 import 'package:tickettouch/screen/auth/forgot_password_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/utils/helper_widgets.dart';
@@ -44,10 +43,7 @@ class _LoginScreenSate extends State<LoginScreen> {
                 password: _passwordController.text.trim())
             .then((value) {
           // if user is verified and exist login else not verified or not exist
-          if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const Menu()));
-          } else if (!_auth.currentUser!.emailVerified) {
+          if (!_auth.currentUser!.emailVerified) {
             _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
                 context,
                 'Your email is not verified! Please check your spam folder if you can\'t find the verify mail.', false));

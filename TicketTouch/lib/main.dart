@@ -12,7 +12,7 @@ import 'package:rive_splash_screen/rive_splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tickettouch/screen/auth/auth_screen.dart';
-import 'package:tickettouch/screen/home/menu.dart';
+import 'package:tickettouch/screen/drawer_menu.dart';
 import 'package:tickettouch/screen/onboarding/onboarding_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/theme/theme_constants.dart';
@@ -113,7 +113,7 @@ class TicketTouchApp extends StatelessWidget {
               } else if (user == null && !_showOnBoarding) {
                 return const AuthScreen();
               } else {
-                return const Menu();
+                return const DrawerMenu();
               }
             },
             until: () => Future.delayed(const Duration(milliseconds: 0)),

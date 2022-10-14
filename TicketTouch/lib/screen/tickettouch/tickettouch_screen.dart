@@ -1,41 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:tickettouch/screen/tickettouch/chats_screen.dart';
+import 'package:tickettouch/screen/tickettouch/events_screen.dart';
+import 'package:tickettouch/screen/tickettouch/home_screen.dart';
+import 'package:tickettouch/screen/tickettouch/tickets_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/theme/theme_constants.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class TicketTouchScreen extends StatefulWidget {
+  const TicketTouchScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenSate();
+  State<TicketTouchScreen> createState() => _TicketTouchScreenState();
 }
 
-class _HomeScreenSate extends State<HomeScreen> {
+class _TicketTouchScreenState extends State<TicketTouchScreen> {
   final auth = FirebaseAuth.instance;
 
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Events',
-      style: optionStyle,
-    ),
-    Text(
-      'Tickets',
-      style: optionStyle,
-    ),
-    Text(
-      'Chats',
-      style: optionStyle,
-    ),
+    HomeScreen(),
+    EventsScreen(),
+    TicketsScreen(),
+    ChatsScreen(),
   ];
 
   @override

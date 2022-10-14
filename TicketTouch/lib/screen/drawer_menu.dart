@@ -2,18 +2,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
-import 'package:tickettouch/screen/home/home_screen.dart';
-import 'package:tickettouch/screen/home/settings_screen.dart';
+import 'package:tickettouch/screen/settings_screen.dart';
+import 'package:tickettouch/screen/tickettouch/tickettouch_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 
-class Menu extends StatefulWidget {
-  const Menu({super.key});
+class DrawerMenu extends StatefulWidget {
+  const DrawerMenu({super.key});
 
   @override
-  State<Menu> createState() => _MenuState();
+  State<DrawerMenu> createState() => _DrawerMenuState();
 }
 
-class _MenuState extends State<Menu> {
+class _DrawerMenuState extends State<DrawerMenu> {
   List<ScreenHiddenDrawer> _pages = [];
 
   final _auth = FirebaseAuth.instance;
@@ -31,7 +31,7 @@ class _MenuState extends State<Menu> {
           selectedStyle:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        const HomeScreen(),
+        const TicketTouchScreen(),
       ),
       ScreenHiddenDrawer(
         ItemHiddenMenu(
