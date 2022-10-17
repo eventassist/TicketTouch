@@ -41,6 +41,14 @@ dependencies:
   settings_ui: ^2.0.0
   theme_mode_handler: ^3.0.0
   google_nav_bar: ^5.0.6
+  ticket_widget: ^0.0.1
+  # qr
+  flutter_camera_qrcode_scanner: ^2.0.0
+  qr_code_scanner:
+    git:
+      url: https://github.com/X-SLAYER/qr_code_scanner.git
+      ref: flutter-beta
+  qr_flutter: ^4.0.0
   # flutterfire
   flutterfire: ^0.0.1
   flutterfire_cli: ^0.2.6

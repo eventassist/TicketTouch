@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 
-class ChatsScreen extends StatefulWidget {
-  const ChatsScreen({Key? key}) : super(key: key);
+class GuestListScreen extends StatefulWidget {
+  const GuestListScreen({Key? key}) : super(key: key);
 
   @override
-  State<ChatsScreen> createState() => _ChatsScreenState();
+  State<GuestListScreen> createState() => _GuestListScreenState();
 }
 
-class _ChatsScreenState extends State<ChatsScreen> {
+class _GuestListScreenState extends State<GuestListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,9 +19,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
           onPressed: () =>
               SimpleHiddenDrawerController.of(context).open(),
         ),
-      ),
-      body: const Text(
-        'Chats',
       ),
     );
   }

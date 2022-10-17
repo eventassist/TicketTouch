@@ -317,6 +317,13 @@
             </list>
           </value>
         </entry>
+        <entry key="flutter_camera_qrcode_scanner">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_camera_qrcode_scanner-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="flutter_facebook_auth">
           <value>
             <list>
@@ -681,6 +688,27 @@
             </list>
           </value>
         </entry>
+        <entry key="qr">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/qr-2.1.0/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="qr_code_scanner">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/.pub-cache/git/qr_code_scanner-5c8a34b848e4e1bad6b4c987d89634b90fd3ab9e//lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="qr_flutter">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/qr_flutter-4.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="quiver">
           <value>
             <list>
@@ -856,6 +884,13 @@
             </list>
           </value>
         </entry>
+        <entry key="ticket_widget">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/ticket_widget-0.0.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="tint">
           <value>
             <list>
@@ -922,6 +957,7 @@
       </option>
     </properties>
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/git/qr_code_scanner-5c8a34b848e4e1bad6b4c987d89634b90fd3ab9e//lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/_flutterfire_internals-1.0.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/ansi_styles-0.3.2+1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.1/lib" />
@@ -966,6 +1002,7 @@
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage-10.3.11/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_platform_interface-4.1.18/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_storage_web-3.3.9/lib" />
+      <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_camera_qrcode_scanner-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth-4.4.1+1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_platform_interface-3.2.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_auth_web-3.2.0/lib" />
@@ -1015,6 +1052,8 @@
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/pub_semver-2.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/pub_updater-0.2.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/pubspec-2.3.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/qr-2.1.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/qr_flutter-4.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.1.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/rive-0.9.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/rive_loading-0.1.3/lib" />
@@ -1039,6 +1078,7 @@
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/test_api-0.4.12/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/theme_mode_handler-3.0.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/ticket_widget-0.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/tint-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/twitter_login-4.2.3/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.1/lib" />

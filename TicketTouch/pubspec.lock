@@ -314,6 +314,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_camera_qrcode_scanner:
+    dependency: "direct main"
+    description:
+      name: flutter_camera_qrcode_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_facebook_auth:
     dependency: "direct main"
     description:
@@ -672,6 +679,29 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.0"
+  qr:
+    dependency: transitive
+    description:
+      name: qr
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
+  qr_code_scanner:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: flutter-beta
+      resolved-ref: "5c8a34b848e4e1bad6b4c987d89634b90fd3ab9e"
+      url: "https://github.com/X-SLAYER/qr_code_scanner.git"
+    source: git
+    version: "0.7.0"
+  qr_flutter:
+    dependency: "direct main"
+    description:
+      name: qr_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   quiver:
     dependency: transitive
     description:
@@ -845,6 +875,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
+  ticket_widget:
+    dependency: "direct main"
+    description:
+      name: ticket_widget
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   tint:
     dependency: transitive
     description:

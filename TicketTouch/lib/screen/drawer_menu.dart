@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:tickettouch/screen/settings_screen.dart';
-import 'package:tickettouch/screen/tickettouch/tickettouch_screen.dart';
+import 'package:tickettouch/screen/tickettouch_screen.dart';
+import 'package:tickettouch/screen/validator/scanner_screen.dart';
+import 'package:tickettouch/screen/validator_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -33,16 +36,17 @@ class _DrawerMenuState extends State<DrawerMenu> {
         ),
         const TicketTouchScreen(),
       ),
-      ScreenHiddenDrawer(
-        ItemHiddenMenu(
-          name: 'Ticket Validator',
-          colorLineSelected: Colors.white,
-          baseStyle: const TextStyle(color: Colors.white),
-          selectedStyle:
-          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      if (!kIsWeb)
+        ScreenHiddenDrawer(
+          ItemHiddenMenu(
+            name: 'Ticket Validator',
+            colorLineSelected: Colors.white,
+            baseStyle: const TextStyle(color: Colors.white),
+            selectedStyle: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          const ValidatorScreen(),
         ),
-        Container(),
-      ),
       ScreenHiddenDrawer(
         ItemHiddenMenu(
           name: 'Account',
@@ -59,7 +63,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           colorLineSelected: Colors.white,
           baseStyle: const TextStyle(color: Colors.white),
           selectedStyle:
-          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         const SettingsScreen(),
       ),
@@ -102,6 +106,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
     return HiddenDrawerMenu(
       backgroundColorMenu: const Color(0xFF00a9ce),
       screens: _pages,
+      backgroundColorAppBar: Theme.of(context).backgroundColor,
+      elevationAppBar: 0,
+      disableAppBarDefault: true,
+      withAutoTittleName: false,
+      withShadow: false,
+      slidePercent: 45,
       initPositionSelected: 0,
     );
   }

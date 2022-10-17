@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutterfire_cli/version.g.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:theme_mode_handler/theme_picker_dialog.dart';
+
+import 'package:theme_mode_handler/theme_picker_dialog.dart';import 'package:tickettouch/theme/theme_constants.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -16,8 +17,12 @@ bool isDarkTheme = false;
 bool isUseFingerprint = true;
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
   @override
   Widget build(BuildContext context) {
+
+    setSystemUiOverlayStyle();
+
     return Scaffold(
       body: SafeArea(
         child: SettingsList(
@@ -36,13 +41,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   enabled: true,
                   onPressed: (BuildContext context) {},
                 ),
-                SettingsTile.switchTile(
+                SettingsTile.navigation(
                   title: const Text('Dark Theme'),
                   description: const Text('Activate Dark Theme'),
                   leading: const Icon(Icons.format_paint),
-                  activeSwitchColor: const Color(0xFF00a9ce),
-                  initialValue: isDarkTheme,
-                  onToggle: (value) {
+                  onPressed: (value) {
                     showThemePickerDialog(context: context);
                     setState(() {
                       isDarkTheme = !isDarkTheme;
