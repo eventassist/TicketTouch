@@ -62,7 +62,7 @@ class _TicketTouchScreenState extends State<TicketTouchScreen> {
               tabBackgroundColor: const Color(0xFF00a9ce),
               tabs: const [
                 GButton(
-                  icon: Icons.house_siding,
+                  icon: Icons.dashboard_outlined,
                   text: 'Home',
                 ),
                 GButton(
@@ -74,7 +74,7 @@ class _TicketTouchScreenState extends State<TicketTouchScreen> {
                   text: 'Tickets',
                 ),
                 GButton(
-                  icon: Icons.mark_unread_chat_alt_outlined,
+                  icon: Icons.chat_outlined,
                   text: 'Chat',
                 ),
               ],
