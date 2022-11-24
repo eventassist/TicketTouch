@@ -43,6 +43,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   ticket_widget: ^0.0.1
   flutter_slidable: ^2.0.0
+  slide_to_act: ^2.0.1
+  image_picker: ^0.8.6
   # qr
   flutter_camera_qrcode_scanner: ^2.0.0
   qr_code_scanner:
@@ -104,7 +106,7 @@ flutter:
     - assets/animations/splash_animation.riv
 
     # images
-    - assets/images/
+    - assets/images/account_avatar.png
 
     # logos
     - assets/logos/1024.png

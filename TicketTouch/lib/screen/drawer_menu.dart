@@ -1,12 +1,14 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:tickettouch/screen/auth/account_screen.dart';
+import 'package:tickettouch/screen/auth/set_account_details_screen.dart';
 import 'package:tickettouch/screen/settings_screen.dart';
-import 'package:tickettouch/screen/tickettouch_screen.dart';
-import 'package:tickettouch/screen/validator/scanner_screen.dart';
-import 'package:tickettouch/screen/validator_screen.dart';
+import 'package:tickettouch/screen/tickettouch/tickettouch_screen.dart';
+import 'package:tickettouch/screen/validator/validator_event_select_screen.dart';
+import 'package:tickettouch/screen/validator/validator_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class DrawerMenu extends StatefulWidget {
@@ -45,17 +47,17 @@ class _DrawerMenuState extends State<DrawerMenu> {
             selectedStyle: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          const ValidatorScreen(),
+          const ValidatorEventSelectScreen(),
         ),
       ScreenHiddenDrawer(
         ItemHiddenMenu(
-          name: 'Account',
+          name: 'Profile',
           colorLineSelected: Colors.white,
           baseStyle: const TextStyle(color: Colors.white),
           selectedStyle:
               const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        const ProfileScreen(),
+        const AccountScreen(),
       ),
       ScreenHiddenDrawer(
         ItemHiddenMenu(
@@ -103,6 +105,22 @@ class _DrawerMenuState extends State<DrawerMenu> {
 
   @override
   Widget build(BuildContext context) {
+    var userDoc = FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid);
+
+    userDoc.get().then(
+          (doc) => {
+            if (!doc.exists)
+              {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SetAccountDetailsScreen(),
+                    )),
+              },
+          },
+        );
     return HiddenDrawerMenu(
       backgroundColorMenu: const Color(0xFF00a9ce),
       screens: _pages,

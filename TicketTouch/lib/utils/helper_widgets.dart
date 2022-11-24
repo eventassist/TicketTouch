@@ -12,6 +12,21 @@ SizedBox distanceWidth(double width) {
   );
 }
 
+CircleAvatar defaultAvatar() {
+  return const CircleAvatar(
+    radius: 60,
+    backgroundImage:AssetImage('assets/images/account_avatar.png'),
+    backgroundColor: Colors.transparent,
+  );
+}
+CircleAvatar networkAvatar(String link) {
+ return CircleAvatar(
+   radius: 60,
+   backgroundImage: NetworkImage(link),
+   backgroundColor: Colors.transparent,
+ );
+}
+
 void showSnackBar(BuildContext context, String text, bool error) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(

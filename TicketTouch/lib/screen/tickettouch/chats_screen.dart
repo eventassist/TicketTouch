@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:provider/provider.dart';
+import 'package:tickettouch/screen/tickettouch/add_friend_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class ChatsScreen extends StatefulWidget {
@@ -17,7 +19,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final uid = context.read<FirebaseAuthMethods>().user.uid;
+    final uid = FirebaseAuth.instance.currentUser!.uid;
 
     final Stream<QuerySnapshot> friendsStream = _firestore
         .collection('users')
@@ -33,6 +35,13 @@ class _ChatsScreenState extends State<ChatsScreen> {
           onPressed: () => SimpleHiddenDrawerController.of(context).open(),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddFriendScreen()));
+        },
+        child: const Icon(Icons.add_outlined),
+      ),
       body: StreamBuilder(
         stream: friendsStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -47,6 +56,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
             );
           }
           return ListView(
+            physics: const BouncingScrollPhysics(),
             children:
                 snapshot.data!.docs.map((DocumentSnapshot documentFriend) {
               CollectionReference users = _firestore.collection('users');
@@ -68,14 +78,27 @@ class _ChatsScreenState extends State<ChatsScreen> {
                     return buildFriendsListItem(
                         context, userSnapshot, documentFriend);
                   }
-                  return const ListTile(
-                    title: Text('Loading'),
-                    subtitle: Text("..."),
-                    leading: Icon(
-                      Icons.account_circle,
-                      size: 63,
-                    ),
-                  );
+                  return Container();
+                  //return Column(
+                  //  children: [
+                  //    const ListTile(
+                  //      title: Text(
+                  //        '...............................',
+                  //        style: TextStyle(
+                  //            color: Colors.grey, backgroundColor: Colors.grey),
+                  //      ),
+                  //      subtitle: Text(
+                  //        '........................',
+                  //        style: TextStyle(
+                  //            color: Colors.grey, backgroundColor: Colors.grey),
+                  //      ),
+                  //      leading: Icon(
+                  //        Icons.account_circle,
+                  //        size: 63,
+                  //      ),
+                  //    ),
+                  //  ],
+                  //);
                 },
               );
             }).toList(),
@@ -94,7 +117,6 @@ class _ChatsScreenState extends State<ChatsScreen> {
         documentFriend.data() as Map<String, dynamic>;
     String uidFriend = userSnapshot.data!.id.toString();
     return Slidable(
-      key: const ValueKey(1),
       startActionPane: ActionPane(
         motion: const DrawerMotion(),
         children: [
@@ -164,17 +186,15 @@ class _ChatsScreenState extends State<ChatsScreen> {
       child: ListTile(
         title: Text(dataFriend['firstname'] + ' ' + dataFriend['lastname']),
         subtitle: Text('@' + dataFriend['username']),
-        leading: dataFriend['photourl'].toString().isEmpty
-            ? const Icon(
-                Icons.account_circle,
-                size: 40,
-              )
+        leading: dataFriend['photoUrl'].toString().isEmpty
+            ? const CircleAvatar(radius: 30.0,
+          backgroundImage: AssetImage('assets/images/account_avatar.png'),
+          backgroundColor: Colors.transparent,)
             : CircleAvatar(
                 radius: 30.0,
-                backgroundImage: NetworkImage(dataFriend['photourl']),
+                backgroundImage: NetworkImage(dataFriend['photoUrl']),
                 backgroundColor: Colors.transparent,
               ),
-        // TODO show only if muted
         trailing: dataFriendSettings['isMuted']
             ? const Icon(
                 Icons.volume_off,
@@ -183,6 +203,9 @@ class _ChatsScreenState extends State<ChatsScreen> {
             : null,
         onTap: () {
           // TODO chat implementation
+          //Navigator.of(context).push(MaterialPageRoute(
+          //  builder: (context) => ChatScreen(user: userSnapshot.data as User),
+          //));
         },
       ),
     );

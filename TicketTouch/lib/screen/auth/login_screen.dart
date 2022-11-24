@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tickettouch/screen/auth/forgot_password_screen.dart';
+import 'package:tickettouch/screen/drawer_menu.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/utils/helper_widgets.dart';
 
@@ -41,13 +42,12 @@ class _LoginScreenSate extends State<LoginScreen> {
             .signInWithEmailAndPassword(
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
-            .then((value) {
-          // if user is verified and exist login else not verified or not exist
-          if (!_auth.currentUser!.emailVerified) {
-            _auth.currentUser!.sendEmailVerification().then((value) => showSnackBar(
-                context,
-                'Your email is not verified! Please check your spam folder if you can\'t find the verify mail.', false));
-          }
+            .whenComplete(() {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DrawerMenu(),
+              ));
           setState(() => _isLoading = false);
         });
       } on FirebaseAuthException catch (e) {
@@ -400,7 +400,14 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithGoogle(context);
+                                      .signInWithGoogle(context).whenComplete(() {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const DrawerMenu(),
+                                        ));
+                                    setState(() => _isLoading = false);
+                                  });
                                 },
                                 icon:
                                     Image.asset('assets/logos/google_logo.png'),
@@ -415,7 +422,14 @@ class _LoginScreenSate extends State<LoginScreen> {
                                   onPressed: () {
                                     context
                                         .read<FirebaseAuthMethods>()
-                                        .signInWithApple(context);
+                                        .signInWithApple(context).whenComplete(() {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const DrawerMenu(),
+                                          ));
+                                      setState(() => _isLoading = false);
+                                    });
                                   },
                                   icon: const Icon(
                                     FontAwesomeIcons.apple,
@@ -430,7 +444,14 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithFacebook(context);
+                                      .signInWithFacebook(context).whenComplete(() {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const DrawerMenu(),
+                                        ));
+                                    setState(() => _isLoading = false);
+                                  });
                                 },
                                 icon: const FaIcon(
                                   FontAwesomeIcons.facebook,
@@ -446,7 +467,14 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithTwitter(context);
+                                      .signInWithTwitter(context).whenComplete(() {
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => const DrawerMenu(),
+                                        ));
+                                    setState(() => _isLoading = false);
+                                  });
                                 },
                                 icon: const Icon(
                                   FontAwesomeIcons.twitter,

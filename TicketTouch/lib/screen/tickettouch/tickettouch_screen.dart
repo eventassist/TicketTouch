@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:provider/provider.dart';
 import 'package:tickettouch/screen/tickettouch/chats_screen.dart';
 import 'package:tickettouch/screen/tickettouch/events_screen.dart';
 import 'package:tickettouch/screen/tickettouch/home_screen.dart';
 import 'package:tickettouch/screen/tickettouch/tickets_screen.dart';
-import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/theme/theme_constants.dart';
 
 class TicketTouchScreen extends StatefulWidget {
@@ -29,7 +27,7 @@ class _TicketTouchScreenState extends State<TicketTouchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<FirebaseAuthMethods>().user;
+    final user = FirebaseAuth.instance.currentUser;
 
     setSystemUiOverlayStyle();
 

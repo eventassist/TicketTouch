@@ -5,9 +5,13 @@ import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:tickettouch/screen/auth/auth_screen.dart';
+import 'package:tickettouch/screen/drawer_menu.dart';
+import 'package:tickettouch/service/firestore_methods.dart';
 import 'package:tickettouch/utils/helper_widgets.dart';
 import 'package:twitter_login/twitter_login.dart';
 
@@ -18,11 +22,6 @@ class FirebaseAuthMethods {
 
   // User Getter
   User get user => _auth.currentUser!;
-
-  // STATE PERSISTENCE
-  Stream<User?> get authState => _auth.authStateChanges();
-
-  Stream<User?> get idToken => _auth.idTokenChanges();
 
   // _auth.userChanges();
   // _auth.idTokenChanges();
@@ -45,7 +44,14 @@ class FirebaseAuthMethods {
         googleProvider
             .addScope('https://www.googleapis.com/auth/userinfo.profile');
 
-        await _auth.signInWithPopup(googleProvider);
+        UserCredential userCredential =
+            await _auth.signInWithPopup(googleProvider).whenComplete(() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DrawerMenu(),
+              ));
+        });
       } else {
         final GoogleSignInAccount? googleUser = await GoogleSignIn(
           scopes: <String>[
@@ -64,13 +70,13 @@ class FirebaseAuthMethods {
             idToken: googleAuth?.idToken,
           );
           UserCredential userCredential =
-              await _auth.signInWithCredential(credential);
-
-          if (userCredential.user != null) {
-            if (userCredential.additionalUserInfo!.isNewUser) {
-              // TODO Firestore New User
-            }
-          }
+              await _auth.signInWithCredential(credential).whenComplete(() {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DrawerMenu(),
+                    ));
+              });
         }
       }
     } on FirebaseAuthException catch (e) {
@@ -93,12 +99,6 @@ class FirebaseAuthMethods {
 
       UserCredential userCredential =
           await _auth.signInWithCredential(facebookAuthCredential);
-
-      if (userCredential.user != null) {
-        if (userCredential.additionalUserInfo!.isNewUser) {
-          // TODO Firestore New User
-        }
-      }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!, true);
     }
@@ -138,12 +138,6 @@ class FirebaseAuthMethods {
       // not match the nonce in `appleCredential.identityToken`, sign in will fail.
       UserCredential userCredential =
           await _auth.signInWithCredential(oAuthCredential);
-
-      if (userCredential.user != null) {
-        if (userCredential.additionalUserInfo!.isNewUser) {
-          // TODO Firestore New User
-        }
-      }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!, true);
     }
@@ -178,12 +172,6 @@ class FirebaseAuthMethods {
         // Once signed in, return the UserCredential
         UserCredential userCredential = await FirebaseAuth.instance
             .signInWithCredential(twitterAuthCredential);
-
-        if (userCredential.user != null) {
-          if (userCredential.additionalUserInfo!.isNewUser) {
-            // TODO Firestore New User
-          }
-        }
       }
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!, true);
@@ -193,7 +181,13 @@ class FirebaseAuthMethods {
   // Sign Out
   Future<void> signOut(BuildContext context) async {
     try {
-      await _auth.signOut();
+      await _auth.signOut().whenComplete(() {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AuthScreen(),
+            ));
+      });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!, true);
     }
@@ -201,9 +195,18 @@ class FirebaseAuthMethods {
 
   // Delete Account
   Future<void> deleteAccount(BuildContext context) async {
+    FirebaseAuthMethods firebaseAuthMethods = FirebaseAuthMethods(_auth);
     try {
-      await _auth.currentUser!.delete();
-      // TODO Firestore user delete
+      // Delete FirebaseAuth User
+      await _auth.currentUser!.delete().whenComplete(() {
+        // Delete Firestore User
+        FirestoreMethods.deleteUserByUid(firebaseAuthMethods.user.uid);
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AuthScreen(),
+            ));
+      });
     } on FirebaseAuthException catch (e) {
       showSnackBar(context, e.message!, true);
     }

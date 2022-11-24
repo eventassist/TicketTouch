@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tickettouch/screen/auth/auth_screen.dart';
 import 'package:tickettouch/screen/drawer_menu.dart';
-import 'package:tickettouch/screen/onboarding/onboarding_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 import 'package:tickettouch/theme/theme_constants.dart';
 
@@ -84,41 +83,48 @@ class TicketTouchApp extends StatelessWidget {
     setSystemUiOverlayStyle();
 
     return MultiProvider(
-        providers: [
-          Provider<FirebaseAuthMethods>(
-            create: (_) => FirebaseAuthMethods(auth),
-          ),
-          StreamProvider(
-            create: (context) => context.read<FirebaseAuthMethods>().authState,
-            initialData: null,
-          ),
-        ],
-        child: MaterialApp(
-          title: 'TicketTouch',
-          useInheritedMediaQuery: true,
-          debugShowCheckedModeBanner: false,
-          theme: lightTheme,
-          darkTheme: darkTheme,
-          // first app start = OnBoardingScreen
-          // signed out = LoginInScreen
-          // signed in = HiddenDrawer (HomeScreen)
-          home: SplashScreen.navigate(
-            backgroundColor: const Color(0xFF00a9ce),
-            endAnimation: 'splash',
-            name: 'assets/animations/splash_animation.riv',
-            next: (context) {
-              final user = context.watch<User?>();
+      providers: [
+        Provider<FirebaseAuthMethods>(
+          create: (_) => FirebaseAuthMethods(auth),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'TicketTouch',
+        useInheritedMediaQuery: true,
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        // first app start = OnBoardingScreen
+        // signed out = LoginInScreen
+        // signed in = HiddenDrawer (HomeScreen)
+        home: SplashScreen.navigate(
+          backgroundColor: const Color(0xFF00a9ce),
+          endAnimation: 'splash',
+          name: 'assets/animations/splash_animation.riv',
+          next: (context) {
+            if (auth.currentUser == null) {
+              return const AuthScreen();
+            }
+            return const DrawerMenu();
+
+            /*final user = context.watch<User?>();
               if (user == null && _showOnBoarding && !kIsWeb) {
                 return const OnBoardingScreen();
               } else if (user == null && !_showOnBoarding) {
                 return const AuthScreen();
               } else {
+                FirestoreMethods firestoreMethods = FirestoreMethods();
+                if (!firestoreMethods.userDataExist(auth.currentUser)) {
+                  return const SetAccountInfoScreen();
+                }
                 return const DrawerMenu();
               }
-            },
-            until: () => Future.delayed(const Duration(milliseconds: 0)),
-          ),
+
+               */
+          },
+          until: () => Future.delayed(const Duration(milliseconds: 0)),
         ),
-      );
+      ),
+    );
   }
 }

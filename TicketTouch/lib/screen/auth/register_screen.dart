@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:tickettouch/screen/drawer_menu.dart';
 
 class RegisterScreen extends StatefulWidget {
   final VoidCallback showLoginScreen;
@@ -30,19 +31,17 @@ class _RegisterScreenSate extends State<RegisterScreen> {
         _isLoading = true;
       });
       try {
-        await _auth
+        UserCredential userCredential = await _auth
             .createUserWithEmailAndPassword(
                 email: _emailController.text.trim(),
                 password: _passwordController.text.trim())
             .whenComplete(() {
-          setState(
-            () {
-              _isLoading = false;
-              _emailController.text = '';
-              _passwordController.text = '';
-              _passwordAgainController.text = '';
-            },
-          );
+          setState(() => _isLoading = false);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const DrawerMenu(),
+              ));
         });
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {
