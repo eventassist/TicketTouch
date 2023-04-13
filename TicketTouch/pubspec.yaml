@@ -86,14 +86,12 @@ flutter:
   assets:
     - assets/
     - assets/animations/
-    - assets/images/
     - assets/logos/
 
     # animations
     - assets/animations/splash_animation.riv
 
     # images
-    - assets/images/
 
     # logos
     - assets/logos/1024.png
