@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onPressed: () =>
               SimpleHiddenDrawerController.of(context).open(),
         ),
+        title: const Text('My Home'),
       ),
       body: const Text(
         'Home',

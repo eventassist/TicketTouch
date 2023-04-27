@@ -19,6 +19,7 @@ class _EventsScreenState extends State<EventsScreen> {
           onPressed: () =>
               SimpleHiddenDrawerController.of(context).open(),
         ),
+        title: const Text('My Events'),
       ),
       body: const Text(
         'Events',

@@ -34,6 +34,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           icon: const Icon(Icons.menu),
           onPressed: () => SimpleHiddenDrawerController.of(context).open(),
         ),
+        title: const Text('My Chats'),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
