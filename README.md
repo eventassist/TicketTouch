@@ -13,9 +13,6 @@ Your Easy Ticketing!
 - [iOS]()
 - [Android]()
 - [Web platform](https://tickettouch.eventassist.eu/)
-- [Microsoft Windows](https://tickettouch.eventassist.eu/download)
-- [macOS](https://tickettouch.eventassist.eu/download)
-- [Linux](https://tickettouch.eventassist.eu/download)
 
 ## Authers
 - [Olison Sturm](https://github.com/olisonsturm)
