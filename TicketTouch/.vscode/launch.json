@@ -17,9 +17,9 @@
             "type": "dart"
         },
         {
-            "name": "Flutter (iPhone 14 Pro Max)",
+            "name": "Flutter (iPhone 14 Pro)",
             "program": "lib/main.dart",
-            "deviceId": "367FED49-F474-42A5-804C-9C8C48A2FFE3",
+            "deviceId": "3E07499E0-AC29-4852-AB8A-E1F03CF8850A",
             "request": "launch",
             "type": "dart"
         },
