@@ -102,8 +102,8 @@ class _LoginScreenSate extends State<LoginScreen> {
                               left: 25,
                               right: 25,
                               top: 25 + systemStatusBarPadding),
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               //TODO: Header
                             ],
                           ),
@@ -352,10 +352,10 @@ class _LoginScreenSate extends State<LoginScreen> {
                         const SizedBox(
                           height: 35,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 25),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 25),
                           child: Row(
-                            children: const [
+                            children: [
                               Expanded(
                                 child: Divider(
                                   color: Colors.grey,
@@ -400,11 +400,13 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithGoogle(context).whenComplete(() {
+                                      .signInWithGoogle(context)
+                                      .whenComplete(() {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const DrawerMenu(),
+                                          builder: (context) =>
+                                              const DrawerMenu(),
                                         ));
                                     setState(() => _isLoading = false);
                                   });
@@ -422,11 +424,13 @@ class _LoginScreenSate extends State<LoginScreen> {
                                   onPressed: () {
                                     context
                                         .read<FirebaseAuthMethods>()
-                                        .signInWithApple(context).whenComplete(() {
+                                        .signInWithApple(context)
+                                        .whenComplete(() {
                                       Navigator.pushReplacement(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => const DrawerMenu(),
+                                            builder: (context) =>
+                                                const DrawerMenu(),
                                           ));
                                       setState(() => _isLoading = false);
                                     });
@@ -444,11 +448,13 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithFacebook(context).whenComplete(() {
+                                      .signInWithFacebook(context)
+                                      .whenComplete(() {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const DrawerMenu(),
+                                          builder: (context) =>
+                                              const DrawerMenu(),
                                         ));
                                     setState(() => _isLoading = false);
                                   });
@@ -467,11 +473,13 @@ class _LoginScreenSate extends State<LoginScreen> {
                                 onPressed: () {
                                   context
                                       .read<FirebaseAuthMethods>()
-                                      .signInWithTwitter(context).whenComplete(() {
+                                      .signInWithTwitter(context)
+                                      .whenComplete(() {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => const DrawerMenu(),
+                                          builder: (context) =>
+                                              const DrawerMenu(),
                                         ));
                                     setState(() => _isLoading = false);
                                   });

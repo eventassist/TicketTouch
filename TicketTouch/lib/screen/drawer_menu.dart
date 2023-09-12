@@ -8,11 +8,10 @@ import 'package:tickettouch/screen/auth/set_account_details_screen.dart';
 import 'package:tickettouch/screen/settings_screen.dart';
 import 'package:tickettouch/screen/tickettouch/tickettouch_screen.dart';
 import 'package:tickettouch/screen/validator/validator_event_select_screen.dart';
-import 'package:tickettouch/screen/validator/validator_screen.dart';
 import 'package:tickettouch/service/firebase_auth_methods.dart';
 
 class DrawerMenu extends StatefulWidget {
-  const DrawerMenu({super.key});
+  const DrawerMenu({Key? key}) : super(key: key);
 
   @override
   State<DrawerMenu> createState() => _DrawerMenuState();
@@ -80,12 +79,12 @@ class _DrawerMenuState extends State<DrawerMenu> {
             FirebaseAuthMethods(_auth).signOut(context);
           },
         ),
-        Scaffold(
+        const Scaffold(
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
+              children: [
                 Text('Logging out...'),
                 SizedBox(height: 20),
                 Padding(
@@ -124,7 +123,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
     return HiddenDrawerMenu(
       backgroundColorMenu: const Color(0xFF00a9ce),
       screens: _pages,
-      backgroundColorAppBar: Theme.of(context).backgroundColor,
+      backgroundColorAppBar: Theme.of(context).colorScheme.background,
       elevationAppBar: 0,
       disableAppBarDefault: true,
       withAutoTittleName: false,

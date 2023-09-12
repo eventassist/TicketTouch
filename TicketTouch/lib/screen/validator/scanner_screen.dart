@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -49,7 +48,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     SimpleHiddenDrawerController.of(context).open(),
               ),
             ),
-            backgroundColor: Theme.of(context).backgroundColor,
+            backgroundColor: Theme.of(context).colorScheme.background,
             body: SafeArea(
               child: Stack(
                 children: <Widget>[
@@ -97,7 +96,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                   height: MediaQuery.of(context).size.height * .45,
                   isCornerRounded: true,
                   padding: const EdgeInsets.all(20),
-                  child: Column(
+                  child: const Column(
                     children: [
                       Text('Name: null'),
                       Text('Geburtsdatum: null'),
@@ -144,7 +143,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
           cutOutSize: MediaQuery.of(context).size.width * .75,
           //cutOutBottomOffset: MediaQuery.of(context).size.height * .17,
           borderColor: Theme.of(context).colorScheme.surface,
-          overlayColor: Theme.of(context).backgroundColor,
+          overlayColor: Theme.of(context).colorScheme.background,
         ),
       );
 

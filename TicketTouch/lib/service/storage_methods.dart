@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter/foundation.dart';
 
 class StorageMethods {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -15,7 +15,9 @@ class StorageMethods {
     try {
       await storageRef.putFile(file);
     } on FirebaseException catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     String downloadUrl = await storageRef.getDownloadURL();
     return downloadUrl;

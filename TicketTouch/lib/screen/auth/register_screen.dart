@@ -93,8 +93,8 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                               left: 25,
                               right: 25,
                               top: 25 + systemStatusBarPadding),
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               //TODO: Header
                             ],
                           ),
@@ -357,8 +357,8 @@ class _RegisterScreenSate extends State<RegisterScreen> {
                               left: 25,
                               right: 25,
                               bottom: 25 + systemNavBarPadding),
-                          child: Row(
-                            children: const [],
+                          child: const Row(
+                            children: [],
                           ),
                         ),
                       ],

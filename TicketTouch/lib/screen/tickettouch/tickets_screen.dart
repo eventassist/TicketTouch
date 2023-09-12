@@ -130,7 +130,7 @@ class _TicketsScreenState extends State<TicketsScreen> {
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
-                                            child: QrImage(
+                                            child: QrImageView(
                                               data: ticket['qrCodeUrl'],
                                               version: QrVersions.auto,
                                               size: 190.0,
@@ -201,7 +201,7 @@ class _TicketsScreenState extends State<TicketsScreen> {
                                       fontSize: 16.0,
                                     ),
                                   ),
-                                  SizedBox(height: 4.0),
+                                  const SizedBox(height: 4.0),
                                   Text(
                                     "${DateFormat('EEEE, dd.MM.yyyy').format(eventData['end'].toDate())} at ${DateFormat('hh:mm').format(eventData['end'].toDate())}",
                                     style: const TextStyle(

@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:tickettouch/service/storage_methods.dart';
+import 'package:flutter/foundation.dart';
 
 class FirestoreMethods {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -32,7 +29,9 @@ class FirestoreMethods {
         'accountCreated': Timestamp.now(),
       });
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
@@ -42,7 +41,9 @@ class FirestoreMethods {
       await _firestore.collection("users").doc(uid).delete();
       value = "success";
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     return value;
   }

@@ -17,8 +17,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
         leading: IconButton(
           iconSize: 24,
           icon: const Icon(Icons.menu),
-          onPressed: () =>
-              SimpleHiddenDrawerController.of(context).open(),
+          onPressed: () => SimpleHiddenDrawerController.of(context).open(),
         ),
       ),
       body: ListView(
@@ -42,7 +41,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
                 // A SlidableAction can have an icon and/or a label.
                 SlidableAction(
                   onPressed: checkIn,
-                  backgroundColor: Color(0xFFFE4A49),
+                  backgroundColor: const Color(0xFFFE4A49),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Delete',
@@ -52,12 +51,12 @@ class _GuestListScreenState extends State<GuestListScreen> {
 
             // The end action pane is the one at the right or the bottom side.
             endActionPane: ActionPane(
-              motion: ScrollMotion(),
+              motion: const ScrollMotion(),
               children: [
                 SlidableAction(
                   // An action can be bigger than the others.
                   onPressed: checkIn,
-                  backgroundColor: Color(0xFF7BC043),
+                  backgroundColor: const Color(0xFF7BC043),
                   foregroundColor: Colors.white,
                   icon: Icons.archive,
                   label: 'Check In',
@@ -73,8 +72,7 @@ class _GuestListScreenState extends State<GuestListScreen> {
       ),
     );
   }
-  
+
   void delete(BuildContext context) {}
   void checkIn(BuildContext context) {}
-
 }

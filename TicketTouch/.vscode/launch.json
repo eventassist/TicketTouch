@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        
+
+        {
+            "name": "Flutter (iPhone von Olison)",
+            "program": "lib/main.dart",
+            "deviceId": "00008120-000E591A2663C01E",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter (Pixel_3a_API_34_extension_level_7_arm64-v8a)",
+            "program": "lib/main.dart",
+            "deviceId": "emulator-5554",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter (iPhone 14 Pro Max)",
+            "program": "lib/main.dart",
+            "deviceId": "367FED49-F474-42A5-804C-9C8C48A2FFE3",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Flutter (Chrome)",
+            "program": "lib/main.dart",
+            "deviceId": "chrome",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

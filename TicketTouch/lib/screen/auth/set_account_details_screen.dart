@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:slide_to_act/slide_to_act.dart';
+import 'package:slide_to_act_reborn/slide_to_act_reborn.dart';
 import 'package:tickettouch/screen/drawer_menu.dart';
 import 'package:tickettouch/service/firestore_methods.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,8 @@ class SetAccountDetailsScreen extends StatefulWidget {
   const SetAccountDetailsScreen({Key? key}) : super(key: key);
 
   @override
-  State<SetAccountDetailsScreen> createState() => _SetAccountDetailsScreenState();
+  State<SetAccountDetailsScreen> createState() =>
+      _SetAccountDetailsScreenState();
 }
 
 class _SetAccountDetailsScreenState extends State<SetAccountDetailsScreen> {
@@ -309,7 +311,9 @@ class _SetAccountDetailsScreenState extends State<SetAccountDetailsScreen> {
                                             formattedDate; //set output date to TextField value.
                                       });
                                     } else {
-                                      print("Date is not selected");
+                                      if (kDebugMode) {
+                                        print("Date is not selected");
+                                      }
                                     }
                                   },
                                   decoration: InputDecoration(

@@ -25,7 +25,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,6 +52,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '222241256146',
     projectId: 'eventassist-tickettouch',
     authDomain: 'eventassist-tickettouch.firebaseapp.com',
+    databaseURL: 'https://eventassist-tickettouch-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'eventassist-tickettouch.appspot.com',
     measurementId: 'G-MCSVBZFX1N',
   );
@@ -58,6 +62,7 @@ class DefaultFirebaseOptions {
     appId: '1:222241256146:android:f0899da62266c83402730b',
     messagingSenderId: '222241256146',
     projectId: 'eventassist-tickettouch',
+    databaseURL: 'https://eventassist-tickettouch-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'eventassist-tickettouch.appspot.com',
   );
 
@@ -66,19 +71,9 @@ class DefaultFirebaseOptions {
     appId: '1:222241256146:ios:90bb3e6e345822cb02730b',
     messagingSenderId: '222241256146',
     projectId: 'eventassist-tickettouch',
+    databaseURL: 'https://eventassist-tickettouch-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'eventassist-tickettouch.appspot.com',
-    androidClientId: '222241256146-d7ss000e73c3g7o1254fljv3bir2tebt.apps.googleusercontent.com',
-    iosClientId: '222241256146-r4a0tss1ng681eadnt8n0ukghe77iei8.apps.googleusercontent.com',
-    iosBundleId: 'eu.eventassist.tickettouch',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBiMux76t19b5MYBQsSiT-KokIkGorHmqY',
-    appId: '1:222241256146:ios:90bb3e6e345822cb02730b',
-    messagingSenderId: '222241256146',
-    projectId: 'eventassist-tickettouch',
-    storageBucket: 'eventassist-tickettouch.appspot.com',
-    androidClientId: '222241256146-d7ss000e73c3g7o1254fljv3bir2tebt.apps.googleusercontent.com',
+    androidClientId: '222241256146-95oe45s8q9pvbfsn6hhgbfakkkrnhtl7.apps.googleusercontent.com',
     iosClientId: '222241256146-r4a0tss1ng681eadnt8n0ukghe77iei8.apps.googleusercontent.com',
     iosBundleId: 'eu.eventassist.tickettouch',
   );

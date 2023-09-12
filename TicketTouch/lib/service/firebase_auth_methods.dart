@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -71,12 +70,12 @@ class FirebaseAuthMethods {
           );
           UserCredential userCredential =
               await _auth.signInWithCredential(credential).whenComplete(() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DrawerMenu(),
-                    ));
-              });
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DrawerMenu(),
+                ));
+          });
         }
       }
     } on FirebaseAuthException catch (e) {
